@@ -106,8 +106,7 @@ public class AgentClient implements OrderedPacketListener, HostStatusListener, I
             e.printStackTrace();
         }
         List<Integer> ports = new ArrayList<>(request.getRequest().getNumParallelSockets());
-        for (Channel channel : channels
-                ) {
+        for (Channel channel : channels) {
             InetSocketAddress socketAddress = (InetSocketAddress) channel.localAddress();
             ports.add(socketAddress.getPort());
         }
