@@ -10,6 +10,7 @@ sudo ovsdb-server /usr/local/etc/openvswitch/conf.db \
 
 sudo ovs-vsctl --no-wait init
 sudo ovs-vswitchd --pidfile --detach
+sudo ps aux |grep ovs
 sudo ovs-vsctl show
 sudo ovs-vsctl --version
 
