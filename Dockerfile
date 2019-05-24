@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 
 ENV SOSAGENT_REPO https://github.com/QingWang0909/SOSAgent.git
 
-RUN apt-get update && apt-get install -y git-core && apt-get -y install maven && apt-get -y install curl
+RUN apt-get update && apt-get install -y git-core && apt-get -y install maven && apt-get -y install curl && apt-get -y install vim
 
 # To resolve "add-apt-repository : command not found" issue
 RUN apt-get -y install software-properties-common
@@ -18,7 +18,10 @@ RUN \
 RUN git clone $SOSAGENT_REPO \
 
 # Compile and run
-&& cd SOSAgent/ && mvn -DskipTests=true compile && mvn -DskipTests=true package
+&& cd SOSAgent/ && mvn -DskipTests=true compile && mvn -DskipTests=true package \
+
+# Set SOS Agent as testing mode
+&& sed -i 's/false/true/g' src/main/resources/config.properties
 
 ADD sos_agent_start.sh /SOSAgent/
 RUN chmod +x /SOSAgent/sos_agent_start.sh
