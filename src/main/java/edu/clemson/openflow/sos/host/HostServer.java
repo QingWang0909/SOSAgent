@@ -118,6 +118,8 @@ public class HostServer extends ChannelInboundHandlerAdapter implements ISocketS
                         localSocketAddress.getHostName(), mockMapping.get(myIndex).getServerAgentIP(), mockParallelConns, 1,
                         mockMapping.get(myIndex).getServerIP(), mockMapping.get(myIndex).getServerPort());
             } else //TODO: If remotely connecting client is in your /etc/hosts than remoteSocketAddress.getHostName() will return that hostname instead of its IP address and following method call will return null
+                log.info("remoteSocketAddress.getHostName() is {}", remoteSocketAddress.getHostName());
+                log.info("remoteSocketAddress.getPort() is {}", remoteSocketAddress.getPort());
                 request = getClientRequest(remoteSocketAddress.getHostName(), remoteSocketAddress.getPort()); // go through the list and find related request
             if (request == null) {
                 log.error("No controller request found for this associated port ...all incoming packets will be dropped ");
