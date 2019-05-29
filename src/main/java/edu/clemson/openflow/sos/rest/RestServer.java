@@ -8,6 +8,7 @@ import org.restlet.Server;
 import org.restlet.data.Protocol;
 import org.restlet.routing.Router;
 import org.slf4j.LoggerFactory;
+import java.lang.*;
 
 /**
  * @author Khayam Anjam kanjam@g.clemson.edu
@@ -16,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class RestServer {
     private Component component;
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(RestServer.class);
-    protected static final int REST_SERVER_PORT = 8002;
+    protected static final int REST_SERVER_PORT = Integer.parseInt(System.getenv("SOS_REST_PORT"));
 
 
 
