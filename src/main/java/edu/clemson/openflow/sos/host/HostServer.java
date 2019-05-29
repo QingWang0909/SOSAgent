@@ -44,7 +44,7 @@ public class HostServer extends ChannelInboundHandlerAdapter implements ISocketS
 
     private static final Logger log = LoggerFactory.getLogger(HostServer.class);
 
-    private static final int DATA_PORT = 9877;
+    private static final int DATA_PORT = Integer.parseInt(System.getenv("SOS_DATA_PORT"));
 
     private List<RequestTemplateWrapper> incomingRequests = new ArrayList<>();
     private NioEventLoopGroup group;
