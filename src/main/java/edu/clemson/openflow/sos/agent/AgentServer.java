@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.*;
 
 public class AgentServer implements ISocketServer, ISocketStatListener {
 
@@ -42,7 +43,7 @@ public class AgentServer implements ISocketServer, ISocketStatListener {
 
     private static final String TRAFFIC_PATH = "/traffic";
     private static final String REST_PORT = "8002";
-    private static final int AGENT_DATA_PORT = 9878;
+    private static final int AGENT_DATA_PORT = Integer.parseInt(System.getenv("SOS_AGENT_DATA_PORT"));
 
     private int chz;
 
