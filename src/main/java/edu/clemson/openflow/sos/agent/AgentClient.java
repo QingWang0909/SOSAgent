@@ -31,6 +31,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.lang.*;
 
 /**
  * @author Khayam Gondal kanjam@g.clemson.edu
@@ -45,8 +46,8 @@ public class AgentClient implements OrderedPacketListener, HostStatusListener, I
     private static final Logger log = LoggerFactory.getLogger(AgentClient.class);
 
     private static final String PORTMAP_PATH = "/portmap";
-    private static final String REST_PORT = "8002";
-    private static final int AGENT_DATA_PORT = 9878;
+    private static final String REST_PORT = System.getenv("SOS_REST_PORT");
+    private static final int AGENT_DATA_PORT = Integer.parseInt(System.getenv("SOS_AGENT_DATA_PORT"));;
 
     private long startTime;
     private float totalBytes;
