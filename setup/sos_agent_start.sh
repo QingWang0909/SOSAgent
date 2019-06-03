@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# start SOS agent script for container entry point
-
-#> /etc/hosts
+# script that starting  SOS agent, used for SOS Dockerfile entry point
 cd SOSAgent/
 java -jar target/sosagent.jar

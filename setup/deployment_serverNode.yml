@@ -1,0 +1,70 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8s-sosagent-serveragent
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-sosagent
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        sos-node: serverAgentNode
+      containers:
+        - name: k8s-sosagent-pod-1
+          image: qingwang0909/sos-agent:container
+          tty: true
+          ports:
+#            - containerPort: 8002
+#              hostPort: 8002
+          securityContext:
+              privileged: true
+          env:
+            - name: SOS_REST_PORT
+              value: "8002"
+            - name: SOS_DATA_PORT
+              value: "9877"
+            - name: SOS_AGENT_DATA_PORT
+              value: "9878"
+          command: ["/bin/sh"]
+          args: ["-c", "umount /etc/hosts; cd SOSAgent; java -jar target/sosagent.jar; sleep 100000"]
+          #args: ["-c", "cd SOSAgent; java -jar target/sosagent.jar; sleep 100000"]
+          #args: ["-c", "while true; do iperf -c 172.17.2.35  -t 5; sleep 150; done"]
+
+        - name: k8s-sosagent-pod-2
+          image: qingwang0909/sos-agent:container
+          tty: true
+          securityContext:
+              privileged: true
+          env:
+            - name: SOS_REST_PORT
+              value: "8003"
+            - name: SOS_DATA_PORT
+              value: "9827"
+            - name: SOS_AGENT_DATA_PORT
+              value: "9828"
+          command: ["/bin/sh"]
+          args: ["-c", "umount /etc/hosts; cd SOSAgent; java -jar target/sosagent.jar; sleep 100000"]
+
+        - name: k8s-sosagent-pod-3
+          image: qingwang0909/sos-agent:container
+          tty: true
+          securityContext:
+              privileged: true
+          env:
+            - name: SOS_REST_PORT
+              value: "8004"
+            - name: SOS_DATA_PORT
+              value: "9837"
+            - name: SOS_AGENT_DATA_PORT
+              value: "9838"
+          command: ["/bin/sh"]
+          args: ["-c", "umount etc/hosts; cd SOSAgent; java -jar target/sosagent.jar; sleep 100000"]
