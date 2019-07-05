@@ -85,7 +85,7 @@ public class A2AClient {
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
             String b = createPacketOfBytes(800000);
-            long startTime = System.currentTimeMillis();
+            long startTime = System.nanoTime()/1000000;
             long totalBytes = 0;
         /*    for (long i=0; i < 100000; i ++){
                 oos.writeObject(b);
@@ -102,7 +102,7 @@ public class A2AClient {
                 oos.write(buffer, 0, read);
             inStream.close();
 
-            long endTime = System.currentTimeMillis();
+            long endTime = System.nanoTime()/1000000;
             long diffInSec = (endTime - startTime) / 1000;
             System.out.println("Total bytes "+ totalBytes);
             System.out.println("Total time "+ diffInSec);

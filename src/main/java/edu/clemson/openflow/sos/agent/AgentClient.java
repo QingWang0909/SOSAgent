@@ -119,7 +119,7 @@ public class AgentClient implements OrderedPacketListener, HostStatusListener, I
         }
 
         StatCollector.getStatCollector().hostAdded();
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime()/1000000;
     }
 
 
@@ -179,7 +179,7 @@ public class AgentClient implements OrderedPacketListener, HostStatusListener, I
             eventLoopGroup.shutdownGracefully();
 
             StatCollector.getStatCollector().connectionRemoved();
-            long stopTime = System.currentTimeMillis();
+            long stopTime = System.nanoTime()/1000000;
             log.debug("AgentClient rate {}", (totalBytes * 8) / (stopTime - startTime) / 1000);
 
         }

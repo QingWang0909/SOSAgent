@@ -152,7 +152,7 @@ public class AgentServer implements ISocketServer, ISocketStatListener {
 
             StatCollector.getStatCollector().connectionAdded();
 
-            startTime = System.currentTimeMillis();
+            startTime = System.nanoTime()/1000000;
 
 
         }
@@ -195,7 +195,7 @@ public class AgentServer implements ISocketServer, ISocketStatListener {
         @Override
         public void channelInactive(ChannelHandlerContext ctx) {
 
-            long stopTime = System.currentTimeMillis();
+            long stopTime = System.nanoTime()/1000000;
 
             if (endHostHandler != null)
                 endHostHandler.transferCompleted(); // notify the host server

@@ -40,20 +40,20 @@ public class A2AServer {
             ServerSocket listener = setupServerSocket(5001);
             Socket socket = listener.accept();
             InputStream inputStream = socket.getInputStream();
-           int c;
-            long startTime = System.currentTimeMillis();
+            int c;
+            long startTime = System.nanoTime()/1000000;
             long totalBytes = 0;
             while ((c = inputStream.read()) != -1) {
                 //System.out.print((char) c);
                 totalBytes++;
-                long currentTime = System.currentTimeMillis();
+                long currentTime = System.nanoTime()/1000000;
                 if (totalBytes > 9000000) {
                    long diffInSec = (currentTime - startTime) / 1000;
                   System.out.println("llllThroughput Mbps " + (totalBytes / diffInSec) * 8 / 1000000);
                }
             }
 
-            long endTime = System.currentTimeMillis();
+            long endTime = System.nanoTime()/1000000;
             long diffInSec = (endTime - startTime) / 1000;
             System.out.println("Total bytes "+ totalBytes);
             System.out.println("Total time "+ diffInSec);

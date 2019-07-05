@@ -133,7 +133,7 @@ public class HostServer extends ChannelInboundHandlerAdapter implements ISocketS
                     request.getRequest().getServerPort(),
                     request.getRequest().getNumParallelSockets());
 
-            startTime = System.currentTimeMillis();
+            startTime = System.nanoTime()/1000000;
 
             if (request != null) {
                 seqGen = new SeqGen();
@@ -170,7 +170,7 @@ public class HostServer extends ChannelInboundHandlerAdapter implements ISocketS
         public void channelInactive(ChannelHandlerContext ctx) {
             if (hostStatusInitiator != null) hostStatusInitiator.hostStatusChanged(HostStatusListener.HostStatus.DONE); // notify Agent Client that host is done sending
 
-            long stopTime = System.currentTimeMillis();
+            long stopTime = System.nanoTime()/1000000;
             log.debug("HostServer rate {}", (totalBytes * 8) / (stopTime - startTime) / 1000000);
 
             // also notify controller to tear down this connection.

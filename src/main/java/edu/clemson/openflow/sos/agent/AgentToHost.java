@@ -64,7 +64,7 @@ public class AgentToHost implements OrderedPacketListener, HostPacketListener, H
         log.debug("Created & started new host handler for server {} port {}",
                 request.getRequest().getServerIP(),
                 request.getRequest().getServerPort());
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime()/1000000;
 
     }
 
