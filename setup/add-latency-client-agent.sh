@@ -2,12 +2,15 @@
 
 # This script runs at client agent node and will add 25ms latency on interface enp130s0f0
 
+# Usage: sudo sh add_delay.sh
+
 interface=enp130s0f0
 ip1=10.0.0.3
 ip2=10.0.0.4
 delay=25ms
 buffer_size=5GB
 
+tc qdisc del dev $interface root
 tc qdisc add dev $interface root handle 1: prio
 tc filter add dev $interface parent 1:0 protocol ip prio 1 u32 match ip dst $ip1 flowid 2:1
 tc filter add dev $interface parent 1:0 protocol ip prio 1 u32 match ip dst $ip2 flowid 2:1

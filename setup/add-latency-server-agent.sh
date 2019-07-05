@@ -8,6 +8,7 @@ ip2=10.0.0.2
 delay=25ms
 buffer_size=5GB
 
+tc qdisc del dev $interface root
 tc qdisc add dev $interface root handle 1: prio
 tc filter add dev $interface parent 1:0 protocol ip prio 1 u32 match ip dst $ip1 flowid 2:1
 tc filter add dev $interface parent 1:0 protocol ip prio 1 u32 match ip dst $ip2 flowid 2:1

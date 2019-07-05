@@ -1,7 +1,10 @@
 #!/bin/sh
 
-iperf -c 10.0.0.4 -t 30 -i 1 -p 5001 > port5001.log &
-iperf -c 10.0.0.4 -t 30 -i 1 -p 5002 > port5002.log &
-iperf -c 10.0.0.4 -t 30 -i 1 -p 5003 > port5003.log &
+
+for i in `seq 1 1`
+do
+    > port500$i.log
+    iperf -c 10.0.0.4 -t 100 -i 1 -p 500$i > port500$i.log &
+done
 
 exit 0
