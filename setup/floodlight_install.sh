@@ -6,6 +6,7 @@ cd floodlight/
 git checkout shella1.0
 
 # Install Java 8 & Maven
+sudo apt-get update 
 sudo apt-get -y install software-properties-common
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt-get update
